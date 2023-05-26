@@ -1,6 +1,7 @@
 const addForm = document.querySelector('.add');
 const todoul = document.querySelector('.todos');
 const searchIp = document.querySelector('.search input');
+
 //method to create and add new todo template to html
 const newTodoTemplate = todo => {
     const template = `
@@ -33,16 +34,25 @@ todoul.addEventListener('click',(e)=>{
     });
 
 
-//Feature to searchentries
-// when search event sumbits then get list of ul
-// then filter ul.span contents with e.target .value
-// replace ul.innerhtml with new tag using filt
-const filterSearch = (val) => { 
-   
+//search filter module
+const searchFilter = (val) =>{
 
-};
+    //filtered list containing value
+    Array.from(todoul.children)
+    .filter((todo) => !todo.textContent.toLowerCase().includes(val))
+    .forEach((todo) => todo.classList.add('filtered'));
 
-searchIp.addEventListener('keyup', (e)=> {
-    const val = e.target.value.trim();
-    filterSearch(val);
+    //Filtered list without value
+    Array.from(todoul.children)
+    .filter((todo) => todo.textContent.toLowerCase().includes(val))
+    .forEach((todo) => todo.classList.remove('filtered'));
+};    
+
+
+//Event listner for search on keyup
+searchIp.addEventListener('keyup', ()=> {
+    const val = searchIp.value.trim().toLowerCase();
+    console.log(val);
+    
+    searchFilter(val);
 });
