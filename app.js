@@ -51,8 +51,7 @@ const searchFilter = (val) =>{
 
 //Event listner for search on keyup
 searchIp.addEventListener('keyup', ()=> {
-    const val = searchIp.value.trim().toLowerCase();
+    const val = searchIp.value.trim().toLowerCase().split(' ');
     console.log(val);
-    
-    searchFilter(val);
+    val.forEach((key) => searchFilter(key)); 
 });
